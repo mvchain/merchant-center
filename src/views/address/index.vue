@@ -21,7 +21,7 @@
       <el-col :span="6">
         <el-select v-model="companyStatus" placeholder="请选择">
           <el-option
-            v-for="item in companyList"
+            v-for="item in statusList"
             :key="item.id"
             :label="item.name"
             :value="item.id">

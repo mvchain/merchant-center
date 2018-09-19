@@ -48,8 +48,11 @@
         <el-form-item label="管理员控制：" prop="delivery" :label-width="formLabelWidth">
           <el-switch active-value="1" inactive-value="0" v-model="manageForm.status"></el-switch>
         </el-form-item>
-        <el-form-item label="订单审核：" prop="delivery" :label-width="formLabelWidth">
-          <el-switch active-value="1" inactive-value="0" v-model="manageForm.review"></el-switch>
+        <el-form-item label="汇总操作：" prop="delivery" :label-width="formLabelWidth">
+          <el-switch active-value="1" inactive-value="0" v-model="manageForm.summary"></el-switch>
+        </el-form-item>
+        <el-form-item label="提币操作：" prop="delivery" :label-width="formLabelWidth">
+          <el-switch active-value="1" inactive-value="0" v-model="manageForm.withdraw"></el-switch>
         </el-form-item>
       </el-form>
       <div slot="footer" class="dialog-footer">
@@ -91,7 +94,8 @@
           account: '',
           password: '',
           status: 0,
-          review: 0
+          summary: 0,
+          withdraw: 0
         }
       }
     },
@@ -119,7 +123,8 @@
           account: 'asdfasdf',
           password: '123123',
           status: '1',
-          review: '1'
+          summary: '1',
+          withdraw: '1'
         }
       }
     }

@@ -1,21 +1,31 @@
 <template>
   <div class="recharge">
     <el-row :gutter="20">
-      <el-col :span="3">
-        <el-button @click="clickAgree">一键同意</el-button>
+      <el-col :span="5">
+        <el-button>导入</el-button>
+        <el-button>导出</el-button>
       </el-col>
-
       <el-col :span="3">
-        <el-select v-model="dateType" @change="changeType" placeholder="请选择">
+        <el-select v-model="companyName" placeholder="请选择">
           <el-option
-            v-for="(v, k) in timeChange"
-            :key="k"
-            :label="v.name"
-            :value="v.id">
+            v-for="item in companyList"
+            :key="item.id"
+            :label="item.name"
+            :value="item.id">
           </el-option>
         </el-select>
       </el-col>
-      <el-col :span="10">
+      <el-col :span="3">
+        <el-select v-model="companyStatus" placeholder="请选择">
+          <el-option
+            v-for="item in statusList"
+            :key="item.id"
+            :label="item.name"
+            :value="item.id">
+          </el-option>
+        </el-select>
+      </el-col>
+      <el-col :span="7">
         <el-date-picker
           v-model="rechargeTime"
           type="daterange"
@@ -31,8 +41,8 @@
         <el-button @click="importFun">表格导出</el-button>
       </el-col>
 
-      <el-col :span="8">
-        <el-input placeholder="输入来源地址、交易哈希" v-model="searchText" class="input-with-select">
+      <el-col :span="6">
+        <el-input placeholder="输入单号、目标地址" v-model="searchText" class="input-with-select">
           <el-button slot="append" icon="el-icon-search">搜索</el-button>
         </el-input>
       </el-col>
@@ -76,18 +86,9 @@
           </template>
         </el-table-column>
         <el-table-column
+          prop="status"
           label="状态">
-          <template slot-scope="scope">
-            <el-dropdown>
-              <span class="el-dropdown-link">
-                待审核<i class="el-icon-arrow-down el-icon--right"></i>
-              </span>
-              <el-dropdown-menu slot="dropdown">
-                <el-dropdown-item>同意</el-dropdown-item>
-                <el-dropdown-item>拒绝</el-dropdown-item>
-              </el-dropdown-menu>
-            </el-dropdown>
-          </template>
+
         </el-table-column>
       </el-table>
       <div style="margin-top:30px; text-align:center;">
@@ -175,7 +176,8 @@
             founds: '2000ETH',
             to: '0x648662ac074c16f5a807c7c9a979cb2786576cae',
             from: '0x648662ac074c16f5a807c7c9a979cb2786576cae',
-            hash: '0x96ab8901985b15f27a26e0f0b6fe1bba6aeb285268c604c6f8d556a400788bcf'
+            hash: '0x96ab8901985b15f27a26e0f0b6fe1bba6aeb285268c604c6f8d556a400788bcf',
+            status: '1'
           },
           {
             time: '2017/01/11',
@@ -184,7 +186,8 @@
             founds: '2000ETH',
             to: '0x648662ac074c16f5a807c7c9a979cb2786576cae',
             from: '0x648662ac074c16f5a807c7c9a979cb2786576cae',
-            hash: '0x96ab8901985b15f27a26e0f0b6fe1bba6aeb285268c604c6f8d556a400788bcf'
+            hash: '0x96ab8901985b15f27a26e0f0b6fe1bba6aeb285268c604c6f8d556a400788bcf',
+            status: '1'
           },
           {
             time: '2017/01/11',
@@ -193,7 +196,8 @@
             founds: '2000ETH',
             to: '0x648662ac074c16f5a807c7c9a979cb2786576cae',
             from: '0x648662ac074c16f5a807c7c9a979cb2786576cae',
-            hash: '0x96ab8901985b15f27a26e0f0b6fe1bba6aeb285268c604c6f8d556a400788bcf'
+            hash: '0x96ab8901985b15f27a26e0f0b6fe1bba6aeb285268c604c6f8d556a400788bcf',
+            status: '1'
           },
           {
             time: '2017/01/11',
@@ -202,7 +206,8 @@
             founds: '2000ETH',
             to: '0x648662ac074c16f5a807c7c9a979cb2786576cae',
             from: '0x648662ac074c16f5a807c7c9a979cb2786576cae',
-            hash: '0x96ab8901985b15f27a26e0f0b6fe1bba6aeb285268c604c6f8d556a400788bcf'
+            hash: '0x96ab8901985b15f27a26e0f0b6fe1bba6aeb285268c604c6f8d556a400788bcf',
+            status: '1'
           },
           {
             time: '2017/01/11',
@@ -211,7 +216,38 @@
             founds: '2000ETH',
             to: '0x648662ac074c16f5a807c7c9a979cb2786576cae',
             from: '0x648662ac074c16f5a807c7c9a979cb2786576cae',
-            hash: '0x96ab8901985b15f27a26e0f0b6fe1bba6aeb285268c604c6f8d556a400788bcf'
+            hash: '0x96ab8901985b15f27a26e0f0b6fe1bba6aeb285268c604c6f8d556a400788bcf',
+            status: '1'
+          }
+        ],
+        companyName: '1',
+        companyStatus: '1',
+        companyList: [
+          {
+            name: '全部商家',
+            id: '1'
+          },
+          {
+            name: '淘宝商家',
+            id: '2'
+          },
+          {
+            name: '京东商家',
+            id: '3'
+          }
+        ],
+        statusList: [
+          {
+            name: '全部状态',
+            id: '1'
+          },
+          {
+            name: '已分配',
+            id: '2'
+          },
+          {
+            name: '未分配',
+            id: '3'
           }
         ]
       }
@@ -224,19 +260,6 @@
         console.log(t)
       },
       changeType(t) {
-      },
-      clickAgree() {
-        this.$confirm('是否同意所有审核?', '提示', {
-          confirmButtonText: '确定',
-          cancelButtonText: '取消',
-          type: 'warning'
-        }).then(() => {
-          this.$message({
-            type: 'success',
-            message: '操作成功!'
-          })
-        }).catch(() => {
-        })
       }
     }
   }

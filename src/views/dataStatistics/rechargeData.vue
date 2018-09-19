@@ -17,6 +17,9 @@
         </el-date-picker>
         <el-button @click="importFun">表格导出</el-button>
       </el-col>
+      <el-col :span="8" style="text-align: right">
+        <span>ETH 总充值金额：2000 ETH</span>
+      </el-col>
     </el-row>
     <div style="margin-top:20px;">
       <el-table
